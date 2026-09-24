@@ -1,56 +1,199 @@
-const danhSachDiem = [
-    {"sbd": "HS2602095", "hoTen": "Nguyễn Thế Anh", "gioiTinh": "Nam", "ngaySinh": "07/05/2004", "diemNoi": "6.0", "diemNghe": "8.0", "diemDocViet": "8.4", "tongDiem": 7.47, "ketQua": "Đạt"},
-    {"sbd": "HS2602012", "hoTen": "Trần Ngọc Bình", "gioiTinh": "Nam", "ngaySinh": "25/10/1979", "diemNoi": "5.0", "diemNghe": "7.0", "diemDocViet": "8.0", "tongDiem": 6.67, "ketQua": "Đạt"},
-    {"sbd": "HS2602019", "hoTen": "Trần Việt Chung", "gioiTinh": "Nam", "ngaySinh": "22/05/1980", "diemNoi": "7.0", "diemNghe": "6.5", "diemDocViet": "8.5", "tongDiem": 7.33, "ketQua": "Đạt"},
-    {"sbd": "HS2602074", "hoTen": "Phạm Thành Đô", "gioiTinh": "Nam", "ngaySinh": "12/05/1988", "diemNoi": "5.0", "diemNghe": "9.0", "diemDocViet": "6.6", "tongDiem": 6.87, "ketQua": "Đạt"},
-    {"sbd": "HS2602020", "hoTen": "Lê Thị Thùy Dung", "gioiTinh": "Nữ", "ngaySinh": "29/10/1996", "diemNoi": "6.0", "diemNghe": "7.5", "diemDocViet": "8.1", "tongDiem": 7.2, "ketQua": "Đạt"},
-    {"sbd": "HS2602049", "hoTen": "Nguyễn Lâm Dũng", "gioiTinh": "Nam", "ngaySinh": "22/06/1999", "diemNoi": "8.5", "diemNghe": "8.5", "diemDocViet": "6.6", "tongDiem": 7.87, "ketQua": "Đạt"},
-    {"sbd": "HS2602039", "hoTen": "Vũ Thị Dương", "gioiTinh": "Nữ", "ngaySinh": "26/03/1983", "diemNoi": "5.0", "diemNghe": "6.0", "diemDocViet": "5.9", "tongDiem": 5.63, "ketQua": "Đạt"},
-    {"sbd": "HS2602082", "hoTen": "Dương Tấn Đạt", "gioiTinh": "Nam", "ngaySinh": "15/06/1995", "diemNoi": "6.5", "diemNghe": "8.5", "diemDocViet": "8.0", "tongDiem": 7.67, "ketQua": "Đạt"},
-    {"sbd": "HS2602018", "hoTen": "Phạm Nguyễn Phát Đạt", "gioiTinh": "Nam", "ngaySinh": "07/11/2004", "diemNoi": "7.5", "diemNghe": "8.5", "diemDocViet": "8.0", "tongDiem": 8.0, "ketQua": "Đạt"},
-    {"sbd": "HS2602030", "hoTen": "Trương Tấn Đạt", "gioiTinh": "Nam", "ngaySinh": "25/08/1990", "diemNoi": "5.0", "diemNghe": "8.0", "diemDocViet": "5.9", "tongDiem": 6.3, "ketQua": "Đạt"},
-    {"sbd": "HS2602016", "hoTen": "Cao Thị Mỹ Hạnh", "gioiTinh": "Nữ", "ngaySinh": "02/09/2004", "diemNoi": "8.5", "diemNghe": "7.5", "diemDocViet": "8.5", "tongDiem": 8.17, "ketQua": "Đạt"},
-    {"sbd": "HS2602015", "hoTen": "Chau Quach Mong Hien", "gioiTinh": "Nữ", "ngaySinh": "20/09/1980", "diemNoi": "5.0", "diemNghe": "5.0", "diemDocViet": "5.9", "tongDiem": 5.3, "ketQua": "Đạt"},
-    {"sbd": "HS2602075", "hoTen": "Ngô Thị Như Hoài", "gioiTinh": "Nữ", "ngaySinh": "24/09/1999", "diemNoi": "8.0", "diemNghe": "8.5", "diemDocViet": "6.0", "tongDiem": 7.5, "ketQua": "Đạt"},
-    {"sbd": "HS2602027", "hoTen": "Lê Văn Hoàng", "gioiTinh": "Nam", "ngaySinh": "10/01/2002", "diemNoi": "6.0", "diemNghe": "6.0", "diemDocViet": "7.4", "tongDiem": 6.47, "ketQua": "Đạt"},
-    {"sbd": "HS2602017", "hoTen": "Trương Thị Mỹ Lệ", "gioiTinh": "Nữ", "ngaySinh": "03/12/1998", "diemNoi": "8.0", "diemNghe": "8.5", "diemDocViet": "7.1", "tongDiem": 7.87, "ketQua": "Đạt"},
-    {"sbd": "HS2602035", "hoTen": "Trần Thị Ánh Liên", "gioiTinh": "Nữ", "ngaySinh": "02/12/1999", "diemNoi": "5.0", "diemNghe": "7.5", "diemDocViet": "6.8", "tongDiem": 6.43, "ketQua": "Đạt"},
-    {"sbd": "HS2602083", "hoTen": "Phạm Yến Linh", "gioiTinh": "Nữ", "ngaySinh": "07/11/1997", "diemNoi": "7.0", "diemNghe": "8.5", "diemDocViet": "6.8", "tongDiem": 7.43, "ketQua": "Đạt"},
-    {"sbd": "HS2602047", "hoTen": "Võ Thị Mỹ Loan", "gioiTinh": "Nữ", "ngaySinh": "11/04/1997", "diemNoi": "6.0", "diemNghe": "6.0", "diemDocViet": "5.1", "tongDiem": 5.7, "ketQua": "Đạt"},
-    {"sbd": "HS2602078", "hoTen": "Lê Phước Lộc", "gioiTinh": "Nam", "ngaySinh": "26/09/2001", "diemNoi": "7.5", "diemNghe": "8.5", "diemDocViet": "8.2", "tongDiem": 8.07, "ketQua": "Đạt"},
-    {"sbd": "HS2602014", "hoTen": "Đỗ Phước Long", "gioiTinh": "Nam", "ngaySinh": "16/09/2004", "diemNoi": "8.5", "diemNghe": "9.0", "diemDocViet": "9.3", "tongDiem": 8.93, "ketQua": "Đạt"},
-    {"sbd": "HS2602029", "hoTen": "Trương Vũ Long", "gioiTinh": "Nam", "ngaySinh": "22/10/1987", "diemNoi": "6.5", "diemNghe": "7.5", "diemDocViet": "6.3", "tongDiem": 6.77, "ketQua": "Đạt"},
-    {"sbd": "HS2602008", "hoTen": "Đào Lê Như Lộc", "gioiTinh": "Nữ", "ngaySinh": "17/12/2004", "diemNoi": "8.5", "diemNghe": "8.5", "diemDocViet": "8.3", "tongDiem": 8.43, "ketQua": "Đạt"},
-    {"sbd": "HS2602026", "hoTen": "Trần Thị Trúc Ly", "gioiTinh": "Nữ", "ngaySinh": "07/10/1990", "diemNoi": "6.0", "diemNghe": "7.0", "diemDocViet": "7.8", "tongDiem": 6.93, "ketQua": "Đạt"},
-    {"sbd": "HS2602034", "hoTen": "Trịnh Thị Ánh Mai", "gioiTinh": "Nữ", "ngaySinh": "04/09/1993", "diemNoi": "5.0", "diemNghe": "6.0", "diemDocViet": "7.3", "tongDiem": 6.1, "ketQua": "Đạt"},
-    {"sbd": "HS2602046", "hoTen": "Nguyễn Hoàng Minh", "gioiTinh": "Nam", "ngaySinh": "27/11/1998", "diemNoi": "7.0", "diemNghe": "7.5", "diemDocViet": "7.3", "tongDiem": 7.27, "ketQua": "Đạt"},
-    {"sbd": "HS2602081", "hoTen": "Vũ Bình Nam", "gioiTinh": "Nam", "ngaySinh": "05/11/2001", "diemNoi": "8.0", "diemNghe": "8.5", "diemDocViet": "7.9", "tongDiem": 8.13, "ketQua": "Đạt"},
-    {"sbd": "HS2602084", "hoTen": "Nguyễn Hoàng Ngân", "gioiTinh": "Nữ", "ngaySinh": "02/09/1997", "diemNoi": "8.0", "diemNghe": "8.5", "diemDocViet": "8.0", "tongDiem": 8.17, "ketQua": "Đạt"},
-    {"sbd": "HS2602010", "hoTen": "Phạm Nguyễn Bảo Nghi", "gioiTinh": "Nữ", "ngaySinh": "21/04/2004", "diemNoi": "8.5", "diemNghe": "8.5", "diemDocViet": "8.4", "tongDiem": 8.47, "ketQua": "Đạt"},
-    {"sbd": "HS2602028", "hoTen": "Lê Đặng Bảo Ngọc", "gioiTinh": "Nữ", "ngaySinh": "08/11/2002", "diemNoi": "6.0", "diemNghe": "7.0", "diemDocViet": "7.8", "tongDiem": 6.93, "ketQua": "Đạt"},
-    {"sbd": "HS2602045", "hoTen": "Nguyễn Lâm Bảo Ngọc", "gioiTinh": "Nữ", "ngaySinh": "25/08/2000", "diemNoi": "8.5", "diemNghe": "8.5", "diemDocViet": "7.5", "tongDiem": 8.17, "ketQua": "Đạt"},
-    {"sbd": "HS2602040", "hoTen": "Trương Thị Mỹ Nhàn", "gioiTinh": "Nữ", "ngaySinh": "19/08/1983", "diemNoi": "5.0", "diemNghe": "6.0", "diemDocViet": "5.1", "tongDiem": 5.37, "ketQua": "Đạt"},
-    {"sbd": "HS2602086", "hoTen": "Dương Thụy Thanh Thảo", "gioiTinh": "Nữ", "ngaySinh": "05/01/1999", "diemNoi": "8.5", "diemNghe": "8.5", "diemDocViet": "7.5", "tongDiem": 8.17, "ketQua": "Đạt"},
-    {"sbd": "HS2602073", "hoTen": "Hà Phương Thảo", "gioiTinh": "Nữ", "ngaySinh": "21/08/1995", "diemNoi": "7.5", "diemNghe": "8.5", "diemDocViet": "7.8", "tongDiem": 7.93, "ketQua": "Đạt"},
-    {"sbd": "HS2602009", "hoTen": "Trần Cao Thiên Thi", "gioiTinh": "Nữ", "ngaySinh": "17/12/2004", "diemNoi": "8.5", "diemNghe": "8.0", "diemDocViet": "8.1", "tongDiem": 8.2, "ketQua": "Đạt"},
-    {"sbd": "HS2602033", "hoTen": "Phạm Duy Thịnh", "gioiTinh": "Nam", "ngaySinh": "17/10/1993", "diemNoi": "6.0", "diemNghe": "6.0", "diemDocViet": "6.5", "tongDiem": 6.17, "ketQua": "Đạt"},
-    {"sbd": "HS2602048", "hoTen": "Huỳnh Tấn Thuận", "gioiTinh": "Nam", "ngaySinh": "01/01/1983", "diemNoi": "6.0", "diemNghe": "7.0", "diemDocViet": "6.9", "tongDiem": 6.63, "ketQua": "Đạt"},
-    {"sbd": "HS2602013", "hoTen": "Nguyễn Ngọc Minh Thuận", "gioiTinh": "Nam", "ngaySinh": "04/09/1982", "diemNoi": "5.0", "diemNghe": "7.5", "diemDocViet": "7.9", "tongDiem": 6.8, "ketQua": "Đạt"},
-    {"sbd": "HS2602080", "hoTen": "Ngô Ngọc Thương", "gioiTinh": "Nữ", "ngaySinh": "10/01/2000", "diemNoi": "8.5", "diemNghe": "8.5", "diemDocViet": "8.0", "tongDiem": 8.33, "ketQua": "Đạt"},
-    {"sbd": "HS2602022", "hoTen": "Hoàng Khắc Tiên", "gioiTinh": "Nam", "ngaySinh": "17/08/1997", "diemNoi": "6.0", "diemNghe": "7.0", "diemDocViet": "7.8", "tongDiem": 6.93, "ketQua": "Đạt"},
-    {"sbd": "HS2602021", "hoTen": "Đỗ Thu Trang", "gioiTinh": "Nữ", "ngaySinh": "21/04/1997", "diemNoi": "6.0", "diemNghe": "7.5", "diemDocViet": "8.3", "tongDiem": 7.27, "ketQua": "Đạt"},
-    {"sbd": "HS2602085", "hoTen": "Võ Kiều Bảo Trâm", "gioiTinh": "Nữ", "ngaySinh": "04/11/1999", "diemNoi": "8.0", "diemNghe": "8.5", "diemDocViet": "7.8", "tongDiem": 8.1, "ketQua": "Đạt"},
-    {"sbd": "HS2602025", "hoTen": "Trương Bảo Trân", "gioiTinh": "Nữ", "ngaySinh": "04/08/2004", "diemNoi": "6.0", "diemNghe": "8.0", "diemDocViet": "8.8", "tongDiem": 7.6, "ketQua": "Đạt"},
-    {"sbd": "HS2602036", "hoTen": "Hà Mậu Trinh", "gioiTinh": "Nữ", "ngaySinh": "17/09/2001", "diemNoi": "5.0", "diemNghe": "6.5", "diemDocViet": "7.8", "tongDiem": 6.43, "ketQua": "Đạt"},
-    {"sbd": "HS2602024", "hoTen": "Trương Đình Trọng", "gioiTinh": "Nam", "ngaySinh": "01/01/1991", "diemNoi": "6.0", "diemNghe": "7.0", "diemDocViet": "7.8", "tongDiem": 6.93, "ketQua": "Đạt"},
-    {"sbd": "HS2602079", "hoTen": "Đặng Thị Cẩm Tú", "gioiTinh": "Nữ", "ngaySinh": "24/09/1999", "diemNoi": "7.5", "diemNghe": "8.5", "diemDocViet": "7.1", "tongDiem": 7.7, "ketQua": "Đạt"},
-    {"sbd": "HS2602076", "hoTen": "Trương Thanh Tùng", "gioiTinh": "Nam", "ngaySinh": "21/04/1999", "diemNoi": "8.0", "diemNghe": "8.5", "diemDocViet": "8.3", "tongDiem": 8.27, "ketQua": "Đạt"},
-    {"sbd": "HS2602038", "hoTen": "Ngô Huỳnh Tuyết", "gioiTinh": "Nữ", "ngaySinh": "22/10/1983", "diemNoi": "5.0", "diemNghe": "6.0", "diemDocViet": "5.3", "tongDiem": 5.43, "ketQua": "Đạt"},
-    {"sbd": "HS2602037", "hoTen": "Hoàng Kim Tuyền", "gioiTinh": "Nữ", "ngaySinh": "26/04/2002", "diemNoi": "5.0", "diemNghe": "6.5", "diemDocViet": "6.8", "tongDiem": 6.1, "ketQua": "Đạt"},
-    {"sbd": "HS2602032", "hoTen": "Trần Văn Tuyền", "gioiTinh": "Nam", "ngaySinh": "10/01/1992", "diemNoi": "6.0", "diemNghe": "7.0", "diemDocViet": "6.1", "tongDiem": 6.37, "ketQua": "Đạt"},
-    {"sbd": "HS2602011", "hoTen": "Trần Nguyễn Thảo Uyên", "gioiTinh": "Nữ", "ngaySinh": "07/08/2004", "diemNoi": "8.5", "diemNghe": "8.5", "diemDocViet": "8.2", "tongDiem": 8.4, "ketQua": "Đạt"},
-    {"sbd": "HS2602023", "hoTen": "Chung Thụy Tường Vi", "gioiTinh": "Nữ", "ngaySinh": "08/04/1996", "diemNoi": "6.0", "diemNghe": "8.0", "diemDocViet": "8.5", "tongDiem": 7.5, "ketQua": "Đạt"},
-    {"sbd": "HS2602077", "hoTen": "Hồ Mộng Thúy Vi", "gioiTinh": "Nữ", "ngaySinh": "08/11/2002", "diemNoi": "8.0", "diemNghe": "8.5", "diemDocViet": "8.3", "tongDiem": 8.27, "ketQua": "Đạt"},
-    {"sbd": "HS2602041", "hoTen": "Đỗ Vũ Yến", "gioiTinh": "Nữ", "ngaySinh": "09/06/1983", "diemNoi": "5.0", "diemNghe": "5.0", "diemDocViet": "5.8", "tongDiem": 5.27, "ketQua": "Đạt"},
-    {"sbd": "HS2602031", "hoTen": "Thân Hoàng Hải Yến", "gioiTinh": "Nữ", "ngaySinh": "21/04/1991", "diemNoi": "6.0", "diemNghe": "7.0", "diemDocViet": "6.4", "tongDiem": 6.47, "ketQua": "Đạt"}
-];
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tra Cứu Kết Quả Thi - Trường Đại học Gia Định</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); 
+            color: #1e293b; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 40px 20px;
+        }
+
+        /* HEADER */
+        .header-container { text-align: center; margin-bottom: 25px; }
+        .logo-img { width: 140px; height: auto; margin-bottom: 15px; }
+        .sub-org { font-size: 12px; text-transform: uppercase; color: #64748b; letter-spacing: 1.5px; margin-bottom: 4px; font-weight: 600; }
+        .school-name { font-size: 16px; font-weight: 700; color: #1e3a8a; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 20px; }
+        .main-title { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 700; color: #0f172a; margin-bottom: 6px; letter-spacing: 1px; }
+        .subtitle { font-family: 'Cinzel', serif; font-size: 22px; font-weight: 700; color: #1e3a8a; margin-bottom: 10px; }
+        .exam-info { font-size: 13px; color: #475569; font-weight: 500; }
+
+        /* FORM CARD */
+        .card { 
+            background: #ffffff; 
+            padding: 35px 30px; 
+            border-radius: 20px; 
+            width: 100%; 
+            max-width: 450px; 
+            border: 1px solid #e2e8f0; 
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.01); 
+        }
+        .form-section-title { 
+            font-size: 12px; 
+            font-weight: 700; 
+            color: #b45309; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            margin-bottom: 20px; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+        .form-section-title::before { content: "—"; color: #d97706; font-weight: bold; }
+
+        .input-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; margin-bottom: 8px; font-size: 12px; font-weight: 700; color: #334155; text-transform: uppercase; letter-spacing: 0.5px; }
+        input { 
+            width: 100%; 
+            padding: 12px 16px; 
+            border-radius: 8px; 
+            border: 1.5px solid #cbd5e1; 
+            background: #f8fafc; 
+            color: #0f172a; 
+            font-size: 14px; 
+            outline: none; 
+            transition: all 0.2s; 
+        }
+        input:focus { border-color: #1e3a8a; background: #ffffff; box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1); }
+        input::placeholder { color: #94a3b8; }
+        .input-hint { font-size: 11px; color: #64748b; margin-top: 6px; }
+
+        /* BUTTON */
+        .btn-submit { 
+            width: 100%; 
+            padding: 14px; 
+            border: none; 
+            border-radius: 8px; 
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); 
+            color: #ffffff; 
+            font-weight: 700; 
+            font-size: 14px; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            cursor: pointer; 
+            margin-top: 10px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 8px; 
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25); 
+            transition: transform 0.1s, box-shadow 0.2s; 
+        }
+        .btn-submit:hover { background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(30, 58, 138, 0.35); }
+
+        /* RESULT AREA */
+        #result { margin-top: 25px; padding: 20px; border-radius: 12px; display: none; background: #f8fafc; border: 1px solid #e2e8f0; }
+        .result-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; color: #334155; }
+        .result-row:last-child { border-bottom: none; }
+        .status-pass { color: #15803d; font-weight: 700; font-size: 15px; }
+        .status-fail { color: #b91c1c; font-weight: 700; font-size: 15px; }
+
+        /* FOOTER */
+        .footer { text-align: center; margin-top: 35px; font-size: 12px; color: #64748b; line-height: 1.6; }
+    </style>
+</head>
+<body>
+
+    <!-- PHẦN THÔNG TIN ĐẦU TRANG -->
+    <div class="header-container">
+        <!-- Đường dẫn logo: dùng file logo.png bạn đã upload ở Bước 1 -->
+        <img src="logo.png" alt="Logo Trường Đại học Gia Định" class="logo-img">
+        
+        <div class="sub-org">Hội đồng Tuyển sinh Sau Đại học</div>
+        <div class="school-name">Trường Đại học Gia Định</div>
+
+        <h1 class="main-title">Tra Cứu Kết Quả Thi</h1>
+        <div class="subtitle">Đánh Giá Năng Lực Tiếng Anh</div>
+        <div class="exam-info">Tuyển sinh Trình độ Thạc sĩ – Đợt 02 – Năm 2026</div>
+    </div>
+
+    <!-- KHUNG NHẬP THÔNG TIN -->
+    <div class="card">
+        <div class="form-section-title">Nhập thông tin xác thực</div>
+        
+        <div class="input-group">
+            <label for="hoTen">Họ và Tên thí sinh</label>
+            <input type="text" id="hoTen" placeholder="VD: Nguyễn Thế Anh">
+            <div class="input-hint">Nhập đầy đủ họ và tên có dấu</div>
+        </div>
+        
+        <div class="input-group">
+            <label for="sbd">Số Báo Danh</label>
+            <input type="text" id="sbd" placeholder="VD: HS2602095">
+            <div class="input-hint">Nhập đúng số báo danh đã đăng ký (ví dụ: HS2602095)</div>
+        </div>
+
+        <button class="btn-submit" onclick="traCuu()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            Tra Cứu Kết Quả
+        </button>
+
+        <div id="result"></div>
+    </div>
+
+    <!-- THÔNG TIN CHÂN TRANG -->
+    <div class="footer">
+        Hệ thống tra cứu kết quả thi đánh giá năng lực tiếng Anh<br>
+        Hội đồng tuyển sinh Sau đại học – Trường Đại học Gia Định
+    </div>
+
+    <script src="data.js"></script>
+    <script>
+        function removeAccents(str) {
+            return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+        }
+
+        function traCuu() {
+            const hoTenInput = document.getElementById('hoTen').value.trim();
+            const sbdInput = document.getElementById('sbd').value.trim().toUpperCase();
+            const resultDiv = document.getElementById('result');
+
+            if (!hoTenInput || !sbdInput) {
+                alert('Vui lòng nhập đầy đủ cả Họ Tên và Số Báo Danh!');
+                return;
+            }
+
+            const hs = danhSachDiem.find(item => 
+                removeAccents(item.hoTen) === removeAccents(hoTenInput) && 
+                item.sbd.toUpperCase() === sbdInput
+            );
+
+            resultDiv.style.display = 'block';
+            if (hs) {
+                const isPass = hs.ketQua.toLowerCase() === 'đạt';
+                resultDiv.innerHTML = `
+                    <div style="text-align: center; margin-bottom: 15px;">
+                        <span class="${isPass ? 'status-pass' : 'status-fail'}">
+                            ${isPass ? '🎉 CHÚC MỪNG BẠN ĐÃ ĐẠT' : '❌ KẾT QUẢ: KHÔNG ĐẠT'}
+                        </span>
+                    </div>
+                    <div class="result-row"><span>Họ và tên:</span><b>${hs.hoTen}</b></div>
+                    <div class="result-row"><span>Số báo danh:</span><b>${hs.sbd}</b></div>
+                    <div class="result-row"><span>Ngày sinh:</span><span>${hs.ngaySinh}</span></div>
+                    <div class="result-row"><span>Điểm Nói:</span><span>${hs.diemNoi}</span></div>
+                    <div class="result-row"><span>Điểm Nghe:</span><span>${hs.diemNghe}</span></div>
+                    <div class="result-row"><span>Điểm Đọc - Viết:</span><span>${hs.diemDocViet}</span></div>
+                    <div class="result-row" style="margin-top: 10px; font-size: 15px; border-top: 1.5px solid #e2e8f0; padding-top: 8px;">
+                        <span><b style="color:#0f172a;">Điểm Tổng:</b></span>
+                        <b style="color: #1e3a8a; font-size: 18px;">${hs.tongDiem}</b>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `<p style="color: #b91c1c; text-align: center; margin: 0; font-size: 13px;">❌ Thông tin không chính xác hoặc không tìm thấy kết quả thi!</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
