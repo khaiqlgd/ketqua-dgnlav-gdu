@@ -21,7 +21,6 @@
             padding: 40px 20px;
         }
 
-        /* HEADER */
         .header-container { text-align: center; margin-bottom: 25px; }
         .logo-img { width: 140px; height: auto; margin-bottom: 15px; }
         .sub-org { font-size: 13px; text-transform: uppercase; color: #64748b; letter-spacing: 1px; margin-bottom: 4px; font-weight: 600; }
@@ -30,7 +29,6 @@
         .subtitle { font-size: 20px; font-weight: 700; color: #1e3a8a; margin-bottom: 10px; text-transform: uppercase; }
         .exam-info { font-size: 13px; color: #475569; font-weight: 500; }
 
-        /* FORM CARD */
         .card { 
             background: #ffffff; 
             padding: 35px 30px; 
@@ -71,7 +69,6 @@
         input::placeholder { color: #94a3b8; }
         .input-hint { font-size: 11px; color: #64748b; margin-top: 6px; }
 
-        /* BUTTON */
         .btn-submit { 
             width: 100%; 
             padding: 14px; 
@@ -95,23 +92,19 @@
         }
         .btn-submit:hover { background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(30, 58, 138, 0.35); }
 
-        /* RESULT AREA */
         #result { margin-top: 25px; padding: 20px; border-radius: 12px; display: none; background: #f8fafc; border: 1px solid #e2e8f0; }
         .result-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; color: #334155; }
         .result-row:last-child { border-bottom: none; }
         .status-pass { color: #15803d; font-weight: 700; font-size: 15px; }
         .status-fail { color: #b91c1c; font-weight: 700; font-size: 15px; }
 
-        /* FOOTER */
         .footer { text-align: center; margin-top: 35px; font-size: 12px; color: #64748b; line-height: 1.6; }
     </style>
 </head>
 <body>
 
-    <!-- PHẦN THÔNG TIN ĐẦU TRANG -->
     <div class="header-container">
         <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/06/logo-dai-hoc-gia-dinh.png" alt="Logo Trường Đại học Gia Định" class="logo-img">
-        
         <div class="sub-org">Hội đồng Tuyển sinh Trình độ Thạc sĩ</div>
         <div class="school-name">Trường Đại học Gia Định</div>
 
@@ -120,20 +113,19 @@
         <div class="exam-info">Tuyển sinh Trình độ Thạc sĩ – Đợt 02 – Năm 2026</div>
     </div>
 
-    <!-- KHUNG NHẬP THÔNG TIN -->
     <div class="card">
         <div class="form-section-title">Nhập thông tin xác thực</div>
         
         <div class="input-group">
             <label for="hoTen">Họ và Tên thí sinh</label>
-            <input type="text" id="hoTen" placeholder="VD: Nguyễn Văn A">
+            <input type="text" id="hoTen" placeholder="VD: Nguyễn Thị Thu Tâm">
             <div class="input-hint">Nhập đầy đủ họ và tên có dấu</div>
         </div>
         
         <div class="input-group">
             <label for="sbd">Số Báo Danh</label>
-            <input type="text" id="sbd" placeholder="VD: HS0000001">
-            <div class="input-hint">Nhập đúng số báo danh đã đăng ký (ví dụ: HS0000001)</div>
+            <input type="text" id="sbd" placeholder="VD: HS2602094">
+            <div class="input-hint">Nhập đúng số báo danh đã đăng ký (ví dụ: HS2602094)</div>
         </div>
 
         <button class="btn-submit" onclick="traCuu()">
@@ -144,7 +136,6 @@
         <div id="result"></div>
     </div>
 
-    <!-- THÔNG TIN CHÂN TRANG -->
     <div class="footer">
         Hệ thống tra cứu kết quả thi đánh giá năng lực tiếng Anh<br>
         Hội đồng Tuyển sinh Trình độ Thạc sĩ – Trường Đại học Gia Định
@@ -176,25 +167,25 @@
             }
 
             if (typeof danhSachDiem === 'undefined' || !Array.isArray(danhSachDiem)) {
-                alert('Chưa tải được danh sách điểm. Vui lòng kiểm tra lại file data.js!');
+                alert('Chưa tải được dữ liệu thi từ file data.js. Vui lòng kiểm tra lại file data.js!');
                 return;
             }
 
             const hs = danhSachDiem.find(item => {
-                const name = getVal(item, ['hoTen', 'ho_ten', 'Hoten', 'HoTen', 'fullName', 'Họ và tên']);
-                const sbd = getVal(item, ['sbd', 'SBD', 'soBaoDanh', 'SoBaoDanh', 'Số báo danh']);
+                const name = getVal(item, ['hoTen', 'ho_ten', 'Hoten', 'HoTen', 'fullName', 'Họ và tên', 'HỌ VÀ TÊN']);
+                const sbd = getVal(item, ['sbd', 'SBD', 'soBaoDanh', 'SoBaoDanh', 'Số báo danh', 'SỐ BÁO DANH']);
                 return removeAccents(name) === removeAccents(hoTenInput) && sbd.toUpperCase().trim() === sbdInput;
             });
 
             resultDiv.style.display = 'block';
             if (hs) {
-                const name = getVal(hs, ['hoTen', 'ho_ten', 'Hoten', 'HoTen', 'fullName', 'Họ và tên']);
-                const sbd = getVal(hs, ['sbd', 'SBD', 'soBaoDanh', 'SoBaoDanh', 'Số báo danh']);
+                const name = getVal(hs, ['hoTen', 'ho_ten', 'Hoten', 'HoTen', 'fullName', 'Họ và tên', 'HỌ VÀ TÊN']);
+                const sbd = getVal(hs, ['sbd', 'SBD', 'soBaoDanh', 'SoBaoDanh', 'Số báo danh', 'SỐ BÁO DANH']);
                 const ngaySinh = getVal(hs, ['ngaySinh', 'ngay_sinh', 'NgaySinh', 'Ngày sinh']);
                 const diemNoi = getVal(hs, ['diemNoi', 'diem_noi', 'DiemNoi', 'Điểm Nói']);
                 const diemNghe = getVal(hs, ['diemNghe', 'diem_nghe', 'DiemNghe', 'Điểm Nghe']);
                 const diemDocViet = getVal(hs, ['diemDocViet', 'diem_doc_viet', 'DiemDocViet', 'Điểm Đọc - Viết']);
-                const tongDiem = getVal(hs, ['tongDiem', 'tong_diem', 'TongDiem', 'diemTong', 'Điểm Tổng']);
+                const tongDiem = getVal(hs, ['tongDiem', 'tong_diem', 'TongDiem', 'diemTong', 'Điểm Tổng', 'Tổng điểm']);
                 const ketQua = getVal(hs, ['ketQua', 'ket_qua', 'KetQua', 'Kết quả']);
 
                 const isPass = ketQua.toLowerCase().includes('đạt') || ketQua.toLowerCase().includes('dat');
@@ -217,7 +208,7 @@
                     </div>
                 `;
             } else {
-                resultDiv.innerHTML = `<p style="color: #b91c1c; text-align: center; margin: 0; font-size: 13px;">❌ Thông tin không chính xác hoặc không tìm thấy kết quả thi!</p>`;
+                resultDiv.innerHTML = `<p style="color: #b91c1c; text-align: center; margin: 0; font-size: 13px;">❌ Không tìm thấy kết quả! Vui lòng kiểm tra lại Họ tên và Số báo danh.</p>`;
             }
         }
     </script>
