@@ -6,11 +6,11 @@
     <title>Tra Cứu Kết Quả Thi - Trường Đại học Gia Định</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
-            font-family: 'Montserrat', sans-serif; 
+            font-family: 'Inter', Arial, Helvetica, sans-serif; 
             background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); 
             color: #1e293b; 
             display: flex; 
@@ -24,10 +24,10 @@
         /* HEADER */
         .header-container { text-align: center; margin-bottom: 25px; }
         .logo-img { width: 140px; height: auto; margin-bottom: 15px; }
-        .sub-org { font-size: 12px; text-transform: uppercase; color: #64748b; letter-spacing: 1.5px; margin-bottom: 4px; font-weight: 600; }
-        .school-name { font-size: 16px; font-weight: 700; color: #1e3a8a; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 20px; }
-        .main-title { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 700; color: #0f172a; margin-bottom: 6px; letter-spacing: 1px; }
-        .subtitle { font-family: 'Cinzel', serif; font-size: 22px; font-weight: 700; color: #1e3a8a; margin-bottom: 10px; }
+        .sub-org { font-size: 13px; text-transform: uppercase; color: #64748b; letter-spacing: 1px; margin-bottom: 4px; font-weight: 600; }
+        .school-name { font-size: 16px; font-weight: 800; color: #1e3a8a; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 20px; }
+        .main-title { font-size: 26px; font-weight: 800; color: #0f172a; margin-bottom: 6px; letter-spacing: 0.5px; text-transform: uppercase; }
+        .subtitle { font-size: 20px; font-weight: 700; color: #1e3a8a; margin-bottom: 10px; text-transform: uppercase; }
         .exam-info { font-size: 13px; color: #475569; font-weight: 500; }
 
         /* FORM CARD */
@@ -65,6 +65,7 @@
             font-size: 14px; 
             outline: none; 
             transition: all 0.2s; 
+            font-family: inherit;
         }
         input:focus { border-color: #1e3a8a; background: #ffffff; box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1); }
         input::placeholder { color: #94a3b8; }
@@ -90,6 +91,7 @@
             gap: 8px; 
             box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25); 
             transition: transform 0.1s, box-shadow 0.2s; 
+            font-family: inherit;
         }
         .btn-submit:hover { background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(30, 58, 138, 0.35); }
 
@@ -108,9 +110,10 @@
 
     <!-- PHẦN THÔNG TIN ĐẦU TRANG -->
     <div class="header-container">
+        <!-- Logo GDU giữ nguyên -->
         <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/06/logo-dai-hoc-gia-dinh.png" alt="Logo Trường Đại học Gia Định" class="logo-img">
         
-        <div class="sub-org">Hội đồng Tuyển sinh Sau Đại học</div>
+        <div class="sub-org">Hội đồng Tuyển sinh Trình độ Thạc sĩ</div>
         <div class="school-name">Trường Đại học Gia Định</div>
 
         <h1 class="main-title">Tra Cứu Kết Quả Thi</h1>
@@ -130,8 +133,8 @@
         
         <div class="input-group">
             <label for="sbd">Số Báo Danh</label>
-            <input type="text" id="sbd" placeholder="VD: GDU2026001">
-            <div class="input-hint">Nhập đúng số báo danh đã đăng ký (ví dụ: GDU2026001)</div>
+            <input type="text" id="sbd" placeholder="VD: HS0000001">
+            <div class="input-hint">Nhập đúng số báo danh đã đăng ký (ví dụ: HS0000001)</div>
         </div>
 
         <button class="btn-submit" onclick="traCuu()">
@@ -145,7 +148,7 @@
     <!-- THÔNG TIN CHÂN TRANG -->
     <div class="footer">
         Hệ thống tra cứu kết quả thi đánh giá năng lực tiếng Anh<br>
-        Hội đồng tuyển sinh Sau đại học – Trường Đại học Gia Định
+        Hội đồng Tuyển sinh Trình độ Thạc sĩ – Trường Đại học Gia Định
     </div>
 
     <script src="data.js"></script>
