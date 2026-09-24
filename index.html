@@ -110,7 +110,6 @@
 
     <!-- PHẦN THÔNG TIN ĐẦU TRANG -->
     <div class="header-container">
-        <!-- Logo GDU giữ nguyên -->
         <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/06/logo-dai-hoc-gia-dinh.png" alt="Logo Trường Đại học Gia Định" class="logo-img">
         
         <div class="sub-org">Hội đồng Tuyển sinh Trình độ Thạc sĩ</div>
@@ -154,7 +153,16 @@
     <script src="data.js"></script>
     <script>
         function removeAccents(str) {
-            return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+            if (!str) return '';
+            return String(str).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+        }
+
+        function getVal(obj, keys) {
+            if (!obj) return '';
+            for (let k of keys) {
+                if (obj[k] !== undefined && obj[k] !== null) return String(obj[k]);
+            }
+            return '';
         }
 
         function traCuu() {
@@ -167,29 +175,45 @@
                 return;
             }
 
-            const hs = danhSachDiem.find(item => 
-                removeAccents(item.hoTen) === removeAccents(hoTenInput) && 
-                item.sbd.toUpperCase() === sbdInput
-            );
+            if (typeof danhSachDiem === 'undefined' || !Array.isArray(danhSachDiem)) {
+                alert('Chưa tải được danh sách điểm. Vui lòng kiểm tra lại file data.js!');
+                return;
+            }
+
+            const hs = danhSachDiem.find(item => {
+                const name = getVal(item, ['hoTen', 'ho_ten', 'Hoten', 'HoTen', 'fullName', 'Họ và tên']);
+                const sbd = getVal(item, ['sbd', 'SBD', 'soBaoDanh', 'SoBaoDanh', 'Số báo danh']);
+                return removeAccents(name) === removeAccents(hoTenInput) && sbd.toUpperCase().trim() === sbdInput;
+            });
 
             resultDiv.style.display = 'block';
             if (hs) {
-                const isPass = hs.ketQua.toLowerCase() === 'đạt';
+                const name = getVal(hs, ['hoTen', 'ho_ten', 'Hoten', 'HoTen', 'fullName', 'Họ và tên']);
+                const sbd = getVal(hs, ['sbd', 'SBD', 'soBaoDanh', 'SoBaoDanh', 'Số báo danh']);
+                const ngaySinh = getVal(hs, ['ngaySinh', 'ngay_sinh', 'NgaySinh', 'Ngày sinh']);
+                const diemNoi = getVal(hs, ['diemNoi', 'diem_noi', 'DiemNoi', 'Điểm Nói']);
+                const diemNghe = getVal(hs, ['diemNghe', 'diem_nghe', 'DiemNghe', 'Điểm Nghe']);
+                const diemDocViet = getVal(hs, ['diemDocViet', 'diem_doc_viet', 'DiemDocViet', 'Điểm Đọc - Viết']);
+                const tongDiem = getVal(hs, ['tongDiem', 'tong_diem', 'TongDiem', 'diemTong', 'Điểm Tổng']);
+                const ketQua = getVal(hs, ['ketQua', 'ket_qua', 'KetQua', 'Kết quả']);
+
+                const isPass = ketQua.toLowerCase().includes('đạt') || ketQua.toLowerCase().includes('dat');
+
                 resultDiv.innerHTML = `
                     <div style="text-align: center; margin-bottom: 15px;">
                         <span class="${isPass ? 'status-pass' : 'status-fail'}">
                             ${isPass ? '🎉 CHÚC MỪNG BẠN ĐÃ ĐẠT' : '❌ KẾT QUẢ: KHÔNG ĐẠT'}
                         </span>
                     </div>
-                    <div class="result-row"><span>Họ và tên:</span><b>${hs.hoTen}</b></div>
-                    <div class="result-row"><span>Số báo danh:</span><b>${hs.sbd}</b></div>
-                    <div class="result-row"><span>Ngày sinh:</span><span>${hs.ngaySinh}</span></div>
-                    <div class="result-row"><span>Điểm Nói:</span><span>${hs.diemNoi}</span></div>
-                    <div class="result-row"><span>Điểm Nghe:</span><span>${hs.diemNghe}</span></div>
-                    <div class="result-row"><span>Điểm Đọc - Viết:</span><span>${hs.diemDocViet}</span></div>
+                    <div class="result-row"><span>Họ và tên:</span><b>${name || hoTenInput}</b></div>
+                    <div class="result-row"><span>Số báo danh:</span><b>${sbd || sbdInput}</b></div>
+                    ${ngaySinh ? `<div class="result-row"><span>Ngày sinh:</span><span>${ngaySinh}</span></div>` : ''}
+                    ${diemNoi ? `<div class="result-row"><span>Điểm Nói:</span><span>${diemNoi}</span></div>` : ''}
+                    ${diemNghe ? `<div class="result-row"><span>Điểm Nghe:</span><span>${diemNghe}</span></div>` : ''}
+                    ${diemDocViet ? `<div class="result-row"><span>Điểm Đọc - Viết:</span><span>${diemDocViet}</span></div>` : ''}
                     <div class="result-row" style="margin-top: 10px; font-size: 15px; border-top: 1.5px solid #e2e8f0; padding-top: 8px;">
                         <span><b style="color:#0f172a;">Điểm Tổng:</b></span>
-                        <b style="color: #1e3a8a; font-size: 18px;">${hs.tongDiem}</b>
+                        <b style="color: #1e3a8a; font-size: 18px;">${tongDiem || '—'}</b>
                     </div>
                 `;
             } else {
