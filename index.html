@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tra Cứu Kết Quả Thi - Trường Đại Học Gia Định</title>
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #0d172a; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .card { background: #1e293b; padding: 35px 30px; border-radius: 16px; width: 100%; max-width: 480px; box-shadow: 0 15px 30px rgba(0,0,0,0.5); border: 1px solid #334155; }
+        .header { text-align: center; margin-bottom: 25px; }
+        .header img { width: 80px; margin-bottom: 10px; }
+        .header h3 { margin: 0; font-size: 14px; text-transform: uppercase; color: #94a3b8; letter-spacing: 1px; }
+        .header h2 { margin: 10px 0 5px 0; font-size: 22px; color: #facc15; }
+        .header p { margin: 0; font-size: 13px; color: #cbd5e1; }
+        .input-group { margin-bottom: 18px; text-align: left; }
+        label { display: block; margin-bottom: 6px; font-size: 14px; color: #e2e8f0; font-weight: 500; }
+        input { width: 100%; padding: 12px 14px; border-radius: 8px; border: 1px solid #475569; background: #0f172a; color: #fff; font-size: 15px; outline: none; transition: border 0.2s; }
+        input:focus { border-color: #eab308; }
+        button { width: 100%; padding: 14px; border: none; border-radius: 8px; background-color: #eab308; color: #0f172a; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 10px; transition: background 0.2s; }
+        button:hover { background-color: #ca8a04; }
+        #result { margin-top: 25px; padding: 20px; border-radius: 10px; display: none; background: #0f172a; border: 1px solid #334155; }
+        .result-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; border-bottom: 1px dashed #334155; padding-bottom: 4px; }
+        .result-row:last-child { border-bottom: none; }
+        .status-pass { color: #4ade80; font-weight: bold; }
+        .status-fail { color: #f87171; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="header">
+            <h3>Trường Đại Học Gia Định</h3>
+            <h2>TRA CỨU KẾT QUẢ THI</h2>
+            <p>Đánh giá năng lực ngoại ngữ tiếng Anh đợt 02 - 2026</p>
+        </div>
+        
+        <div class="input-group">
+            <label for="hoTen">Bước 1: Họ và Tên thí sinh</label>
+            <input type="text" id="hoTen" placeholder="VD: Nguyễn Thế Anh">
+        </div>
+        
+        <div class="input-group">
+            <label for="sbd">Bước 2: Số Báo Danh (SBD)</label>
+            <input type="text" id="sbd" placeholder="VD: HS2602095">
+        </div>
+
+        <button onclick="traCuu()">🔍 TRA CỨU KẾT QUẢ</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script src="data.js"></script>
+    <script>
+        // Hàm chuẩn hóa tiếng Việt không dấu để so sánh tên dễ dàng hơn
+        function removeAccents(str) {
+            return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+        }
+
+        function traCuu() {
+            const hoTenInput = document.getElementById('hoTen').value.trim();
+            const sbdInput = document.getElementById('sbd').value.trim().toUpperCase();
+            const resultDiv = document.getElementById('result');
+
+            if (!hoTenInput || !sbdInput) {
+                alert('Vui lòng nhập đầy đủ cả Họ Tên và Số Báo Danh!');
+                return;
+            }
+
+            // Tìm kiếm thí sinh khớp cả Họ tên và SBD
+            const hs = danhSachDiem.find(item => 
+                removeAccents(item.hoTen) === removeAccents(hoTenInput) && 
+                item.sbd.toUpperCase() === sbdInput
+            );
+
+            resultDiv.style.display = 'block';
+            if (hs) {
+                const isPass = hs.ketQua.toLowerCase() === 'đạt';
+                resultDiv.innerHTML = `
+                    <div style="text-align: center; margin-bottom: 15px;">
+                        <span class="${isPass ? 'status-pass' : 'status-fail'}" style="font-size: 16px;">
+                            ${isPass ? '🎉 CHÚC MỪNG BẠN ĐÃ ĐẠT' : '❌ KẾT QUẢ: KHÔNG ĐẠT'}
+                        </span>
+                    </div>
+                    <div class="result-row"><span>Họ và tên:</span><b>${hs.hoTen}</b></div>
+                    <div class="result-row"><span>Số báo danh:</span><b>${hs.sbd}</b></div>
+                    <div class="result-row"><span>Ngày sinh:</span><span>${hs.ngaySinh}</span></div>
+                    <div class="result-row"><span>Điểm Nói:</span><span>${hs.diemNoi}</span></div>
+                    <div class="result-row"><span>Điểm Nghe:</span><span>${hs.diemNghe}</span></div>
+                    <div class="result-row"><span>Điểm Đọc - Viết:</span><span>${hs.diemDocViet}</span></div>
+                    <div class="result-row" style="margin-top: 10px; font-size: 16px;">
+                        <span><b>Điểm Tổng:</b></span>
+                        <b style="color: #facc15; font-size: 18px;">${hs.tongDiem}</b>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `<p style="color: #f87171; text-align: center; margin: 0;">❌ Thông tin không chính xác hoặc không tìm thấy kết quả thi!</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
